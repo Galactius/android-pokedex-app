@@ -13,6 +13,9 @@
         android:theme="@style/Theme.PokedexApp">
 
         <activity
+            android:name=".detailedViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
