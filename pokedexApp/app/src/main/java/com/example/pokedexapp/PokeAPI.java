@@ -59,6 +59,50 @@ public class PokeAPI extends AsyncTask<String, Void, String>
     @Override
     protected String doInBackground(String... strings)
     {
-        return null;
+        String jsonString = null;
+
+        try
+        {
+            jsonString = getPokeInfo(strings[0]);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return jsonString;
+    }
+
+    protected void onPostExecute(String s)
+    {
+        super.onPostExecute(s);
+        Integer num = null;
+        String name = null;
+        String type = null;
+        String abil = null;
+        String desc = null;
+        String imgURL = null;
+        JSONObject jsonObject = null;
+        JSONArray itemsArray = null;
+        int i = 0;
+
+        try
+        {
+            jsonObject = new JSONObject(s);
+            itemsArray = jsonObject.getJSONArray("items");
+
+            while(i < itemsArray.length()) //there's a && == null but we'll see if i need it
+            {
+                JSONObject pokemon = itemsArray.getJSONObject(i);
+                // jsonobject here that idk what it does, double chek
+                // left off here :c
+            }
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
     }
 }
