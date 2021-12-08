@@ -1,8 +1,10 @@
 package com.example.pokedexapp;
 
+import com.example.pokedexapp.PokeAPI;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 
 import java.util.LinkedList;
@@ -18,6 +20,8 @@ public class MainActivity extends AppCompatActivity
 
     private int numOfPKMNs = 10;
 
+    private final PokeAPI api = new PokeAPI("1");
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -30,11 +34,15 @@ public class MainActivity extends AppCompatActivity
     protected void processData()
     {
         numOfPKMNs = 10; //number of pokemons to process
-        for(int curPKMN = 0; curPKMN < numOfPKMNs; curPKMN++)
-        {
-            //mPokemonNameList.add( INSERT PKMN NAME FROM API);
-            //mPokemonTypeList.add( INSERT PKMN TYPES FROM API AS CONCAT STR);
-        }
+//        for(int curPKMN = 0; curPKMN < numOfPKMNs; curPKMN++)
+//        {
+//            //mPokemonNameList.add( INSERT PKMN NAME FROM API);
+//            //mPokemonTypeList.add( INSERT PKMN TYPES FROM API AS CONCAT STR);
+//        }
+
+        //test api call
+        String name = api.getName();
+        Log.d("API_TEST", "name = " + name);
     }
 
 }
