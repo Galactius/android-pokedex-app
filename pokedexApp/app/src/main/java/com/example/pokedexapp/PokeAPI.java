@@ -18,10 +18,13 @@ import java.net.URL;
 
 public class PokeAPI extends AsyncTask<String, Void, String>
 {
+    //temp
+    private String PokeNum;
+    private String nameToReturn;
 
-    PokeAPI()
+    PokeAPI(String PN)
     {
-
+        this.PokeNum = new String();
     }
 
     protected String getPokeInfo(String query) throws IOException
@@ -98,7 +101,7 @@ public class PokeAPI extends AsyncTask<String, Void, String>
                 //JSONObject names = pokemon.getJSONObject("name");
                 name = pokemon.getString("name");
 
-                getName(name);
+                nameToReturn = name;
 
                 i++;
             }
@@ -110,8 +113,8 @@ public class PokeAPI extends AsyncTask<String, Void, String>
         }
     }
 
-    public String getName(String n)
+    public String getName()
     {
-        return n;
+        return nameToReturn;
     }
 }
