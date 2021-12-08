@@ -73,7 +73,7 @@ public class PokeAPI extends AsyncTask<String, Void, String>
         return jsonString;
     }
 
-    protected void onPostExecute(String s)
+    protected void onPostExecute(String s) //s comes from doInBackground
     {
         super.onPostExecute(s);
         Integer num = null;
@@ -94,8 +94,13 @@ public class PokeAPI extends AsyncTask<String, Void, String>
             while(i < itemsArray.length()) //there's a && == null but we'll see if i need it
             {
                 JSONObject pokemon = itemsArray.getJSONObject(i);
-                // jsonobject here that idk what it does, double chek
-                // left off here :c
+                //JSONObject that gets some info from above
+                //JSONObject names = pokemon.getJSONObject("name");
+                name = pokemon.getString("name");
+
+                getName(name);
+
+                i++;
             }
 
         }
@@ -103,6 +108,10 @@ public class PokeAPI extends AsyncTask<String, Void, String>
         {
             e.printStackTrace();
         }
+    }
 
+    public String getName(String n)
+    {
+        return n;
     }
 }
