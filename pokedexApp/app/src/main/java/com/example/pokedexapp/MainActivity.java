@@ -1,6 +1,6 @@
 package com.example.pokedexapp;
 
-import com.example.pokedexapp.PokeAPI;
+//import com.example.pokedexapp.PokeAPI;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -29,6 +29,13 @@ public class MainActivity extends AppCompatActivity
     private final LinkedList<String> mPokemonDescList = new LinkedList<>();
     private final LinkedList<ImageView> mPokemonImageList = new LinkedList<>();
 
+    String num = null;
+    String name = null;
+    String type = null;
+    String abil = null;
+    String desc = null;
+    String imgURL = null;
+
     private int numOfPKMNs = 10;
 
 //    private final PokeAPI api = new PokeAPI("1");
@@ -43,12 +50,15 @@ public class MainActivity extends AppCompatActivity
 
         //testing
 
-        String num = "1";
-        PokeAPI api = new PokeAPI(num);
+        num = "1";
+        PokeAPI api = new PokeAPI();
         api.execute(num);
         String name = api.getName();
         Log.d("API_TEST", "name = " + name);
-
+        Log.d("API_TEST", "type = " + type);
+        Log.d("API_TEST", "abil = " + abil);
+        Log.d("API_TEST", "desc = " + desc);
+        Log.d("API_TEST", "imgUrl = " + imgURL);
     }
 
     protected void processData()
@@ -62,112 +72,107 @@ public class MainActivity extends AppCompatActivity
 
         //test api call
 //        String name = api.getName();
-//        Log.d("API_TEST", "name = " + name);
-
 
     }
-}
 
-
-class PokeAPI extends AsyncTask<String, Void, String>
-{
-    //temp
-    private String PokeNum;
-
-    PokeAPI(String num)
+    class PokeAPI extends AsyncTask<String, Void, String>
     {
-        //num = PokeNum;
-    }
+        //temp
+        private String PokeNum;
 
-    protected String getPokeInfo(String query) throws IOException
-    {
-        //Main API URL
-        String apiURL = "https://pokeapi.co/api/v2/pokemon/";
-        apiURL += query; // Adds the specific shit we need to look up in the api to the URL
-
-        //Connects API
-        URL requestURL = new URL(apiURL);
-        HttpURLConnection urlConnection = (HttpURLConnection) requestURL.openConnection();
-        urlConnection.setRequestMethod("GET");
-        urlConnection.connect();
-
-        //Recieves Respone
-        InputStream inputStream = urlConnection.getInputStream();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-
-        //Creates a String with the Response
-        StringBuilder builder = new StringBuilder();
-        String line; //sends response back as string, might change to make it easier???
-
-        while((line = reader.readLine()) != null)
+        protected String getPokeInfo(String query) throws IOException
         {
-            builder.append(line);
-            builder.append("\n");
-        }
+            //Main API URL
+            String apiURL = "https://pokeapi.co/api/v2/pokemon/";
+            apiURL += query; // Adds the specific shit we need to look up in the api to the URL
 
-        String jsonString = builder.toString();
-        Log.d("PokeAPIJsonString", jsonString);
+            //Connects API
+            URL requestURL = new URL(apiURL);
+            HttpURLConnection urlConnection = (HttpURLConnection) requestURL.openConnection();
+            urlConnection.setRequestMethod("GET");
+            urlConnection.connect();
 
-        return jsonString;
-    }
+            //Recieves Respone
+            InputStream inputStream = urlConnection.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
-    @Override
-    protected String doInBackground(String... strings)
-    {
-        String jsonString = null;
+            //Creates a String with the Response
+            StringBuilder builder = new StringBuilder();
+            String line; //sends response back as string, might change to make it easier???
 
-        try
-        {
-            jsonString = getPokeInfo(strings[0]);
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-
-        return jsonString;
-    }
-
-    protected void onPostExecute(String s) //s comes from doInBackground
-    {
-        super.onPostExecute(s);
-        Integer num = null;
-        String name = null;
-        String type = null;
-        String abil = null;
-        String desc = null;
-        String imgURL = null;
-        JSONObject jsonObject = null;
-        JSONArray itemsArray = null;
-        int i = 0;
-
-        try
-        {
-            jsonObject = new JSONObject(s);
-            itemsArray = jsonObject.getJSONArray("items"); // chooses what array in API to look in
-
-            while(i < itemsArray.length()) //there's a && == null but we'll see if i need it
+            while((line = reader.readLine()) != null)
             {
-                //JSONObject pokemon = itemsArray.getJSONObject(i); //gets items from array in API listed in itemsArray
-                //JSONObject that gets some info from above
-                //JSONObject names = pokemon.getJSONObject("name");
-
-
-                i++;
+                builder.append(line);
+                builder.append("\n");
             }
 
-            name = jsonObject.getString("name");
+            String jsonString = builder.toString();
+            Log.d("PokeAPIJsonString", jsonString);
 
-
+            return jsonString;
         }
-        catch (Exception e)
+
+        @Override
+        protected String doInBackground(String... strings)
         {
-            e.printStackTrace();
+            String jsonString = null;
+
+            try
+            {
+                jsonString = getPokeInfo(strings[0]);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+
+            return jsonString;
+        }
+
+        protected void onPostExecute(String s) //s comes from doInBackground
+        {
+            super.onPostExecute(s);
+            num = null;
+            name = null;
+            type = null;
+            abil = null;
+            desc = null;
+            imgURL = null;
+            JSONObject jsonObject = null;
+            JSONArray itemsArray = null;
+            int i = 0;
+
+            try
+            {
+                jsonObject = new JSONObject(s);
+                itemsArray = jsonObject.getJSONArray("items"); // chooses what array in API to look in
+
+                while(i < itemsArray.length()) //there's a && == null but we'll see if i need it
+                {
+                    //JSONObject pokemon = itemsArray.getJSONObject(i); //gets items from array in API listed in itemsArray
+                    //JSONObject that gets some info from above
+                    //JSONObject names = pokemon.getJSONObject("name");
+
+
+                    i++;
+                }
+
+                name = jsonObject.getString("name");
+
+
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+
+        public String getName()
+        {
+            return PokeNum;
         }
     }
 
-    public String getName()
-    {
-        return PokeNum;
-    }
 }
+
+
