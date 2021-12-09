@@ -2,7 +2,11 @@ package com.example.pokedexapp;
 
 //import com.example.pokedexapp.PokeAPI;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,6 +20,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.ContentHandler;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.LinkedList;
@@ -29,8 +34,12 @@ public class MainActivity extends AppCompatActivity
     private final LinkedList<String> mPokemonDescList = new LinkedList<>();
     private final LinkedList<ImageView> mPokemonImageList = new LinkedList<>();
 
+    private RecyclerView mRecyclerView;
+    private pokedexAdapter mAdapter;
+    private Context context;
+
     String num = null;
-    String name = null;
+    String name;
     String type = null;
     String abil = null;
     String desc = null;
@@ -46,39 +55,38 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        processData();
+        //processData();
 
         //testing
 
         num = "1";
         PokeAPI api = new PokeAPI();
         api.execute(num);
-        String name = api.getName();
-        Log.d("API_TEST", "name = " + name);
-        Log.d("API_TEST", "type = " + type);
-        Log.d("API_TEST", "abil = " + abil);
-        Log.d("API_TEST", "desc = " + desc);
-        Log.d("API_TEST", "imgUrl = " + imgURL);
+
     }
 
-    protected void processData()
+    protected void processData(String result)
     {
-        numOfPKMNs = 10; //number of pokemons to process
-//        for(int curPKMN = 0; curPKMN < numOfPKMNs; curPKMN++)
-//        {
-//            //mPokemonNameList.add( INSERT PKMN NAME FROM API);
-//            //mPokemonTypeList.add( INSERT PKMN TYPES FROM API AS CONCAT STR);
-//        }
+        name = result;
+        Log.d("processDataREACHtest", name);
 
-        //test api call
-//        String name = api.getName();
+        mPokemonNameList.add(name);
+        Log.d("ListAddTest", mPokemonNameList.get(0));
 
+
+    }
+
+    private void CALL_TEST()
+    {
+        mRecyclerView = findViewById(R.id.recyclerView);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter = new pokedexAdapter(this, mPokemonNumberList, mPokemonNameList);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     class PokeAPI extends AsyncTask<String, Void, String>
     {
         //temp
-        private String PokeNum;
 
         protected String getPokeInfo(String query) throws IOException
         {
@@ -129,11 +137,12 @@ public class MainActivity extends AppCompatActivity
             return jsonString;
         }
 
+
         protected void onPostExecute(String s) //s comes from doInBackground
         {
             super.onPostExecute(s);
             num = null;
-            name = null;
+            //name = null;
             type = null;
             abil = null;
             desc = null;
@@ -145,20 +154,30 @@ public class MainActivity extends AppCompatActivity
             try
             {
                 jsonObject = new JSONObject(s);
-                itemsArray = jsonObject.getJSONArray("items"); // chooses what array in API to look in
+//              itemsArray = jsonObject.getJSONArray("items"); // chooses what array in API to look in
+//
+//                while(i < itemsArray.length()) //there's a && == null but we'll see if i need it
+//                {
+//                    //JSONObject pokemon = itemsArray.getJSONObject(i); //gets items from array in API listed in itemsArray
+//                    //JSONObject that gets some info from above
+//                    //JSONObject names = pokemon.getJSONObject("name");
+//
+//
+//                    i++;
+//                }
 
-                while(i < itemsArray.length()) //there's a && == null but we'll see if i need it
-                {
-                    //JSONObject pokemon = itemsArray.getJSONObject(i); //gets items from array in API listed in itemsArray
-                    //JSONObject that gets some info from above
-                    //JSONObject names = pokemon.getJSONObject("name");
 
-
-                    i++;
-                }
+                //itemsArray = jsonObject.getJSONArray("items")
 
                 name = jsonObject.getString("name");
 
+                Log.d("APICallTester", name);
+
+                //mPokemonNameList.add(name);
+
+                //Log.d("NameListViewer", mPokemonNameList.get(0));
+
+                MainActivity.this.processData(name);
 
             }
             catch (Exception e)
@@ -166,13 +185,7 @@ public class MainActivity extends AppCompatActivity
                 e.printStackTrace();
             }
         }
-
-        public String getName()
-        {
-            return PokeNum;
-        }
     }
-
 }
 
 
