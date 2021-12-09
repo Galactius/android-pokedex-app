@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity
 
         mPokemonNumberList.add("1");
 
-
+        CALL_TEST();
     }
 
     private void CALL_TEST()
@@ -148,11 +148,15 @@ public class MainActivity extends AppCompatActivity
             imgURL = null;
             JSONObject jsonObject = null;
             JSONArray itemsArray = null;
+            JSONArray MainTypeArray = null;
+            JSONArray typesArray = null;
             int i = 0;
 
             try
             {
                 jsonObject = new JSONObject(s);
+
+
 //              itemsArray = jsonObject.getJSONArray("items"); // chooses what array in API to look in
 //
 //                while(i < itemsArray.length()) //there's a && == null but we'll see if i need it
@@ -166,15 +170,19 @@ public class MainActivity extends AppCompatActivity
 //                }
 
 
-                //itemsArray = jsonObject.getJSONArray("items")
-
+                //gets name
                 name = jsonObject.getString("name");
+                Log.d("NameAPICallTest", name);
 
-                Log.d("APICallTester", name);
+                //gets first type
+                typesArray = jsonObject.getJSONArray("types");
+                JSONObject types = typesArray.getJSONObject(0);
+                JSONObject type1 = types.getJSONObject("type");
+                type = type1.getString("name");
+                Log.d("TypeAPICallTest", type);
 
-                //mPokemonNameList.add(name);
 
-                //Log.d("NameListViewer", mPokemonNameList.get(0));
+
 
                 MainActivity.this.processData(name);
 
