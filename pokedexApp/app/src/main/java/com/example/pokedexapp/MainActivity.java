@@ -61,8 +61,6 @@ public class MainActivity extends AppCompatActivity
         PokeAPI api = new PokeAPI();
         api.execute(num);
 
-        Intent detailIntent = new Intent(this, detailedViewActivity.class);
-        detailIntent.putExtra("name", mPokemonNameList);
 
     }
 
@@ -152,7 +150,7 @@ public class MainActivity extends AppCompatActivity
             imgURL = null;
             JSONObject jsonObject = null;
             JSONArray itemsArray = null;
-            JSONArray MainTypeArray = null;
+            JSONArray abilArray = null;
             JSONArray typesArray = null;
             int i = 0;
 
@@ -185,7 +183,11 @@ public class MainActivity extends AppCompatActivity
                 type = type1.getString("name");
                 Log.d("TypeAPICallTest", type);
 
-
+                abilArray = jsonObject.getJSONArray("abilities");
+                JSONObject abilities = abilArray.getJSONObject(0);
+                JSONObject abil1 = abilities.getJSONObject("ability");
+                abil = abil1.getString("name");
+                Log.d("AbilityAPICallTest", abil);
 
 
                 MainActivity.this.processData(name);
