@@ -20,12 +20,21 @@ public class pokedexAdapter extends RecyclerView.Adapter<pokedexAdapter.pokedexV
 
     private LinkedList<String> mPokemonNumberList = new LinkedList<>();
     private LinkedList<String> mPokemonNameList = new LinkedList<>();
+    private LinkedList<String> mPokemonTypeList = new LinkedList<>();
+    private LinkedList<String> mPokemonAbilityList = new LinkedList<>();
+    private LinkedList<String> mPokemonDescList = new LinkedList<>();
+    //private LinkedList<ImageView> mPokemonImageList = new LinkedList<>();
 
-    public pokedexAdapter(Context context, LinkedList<String> numList, LinkedList<String> nameList)
+    public pokedexAdapter(Context context, LinkedList<String> numList, LinkedList<String> nameList, LinkedList<String> typeList,
+                                                                                    LinkedList<String> abilList, LinkedList<String> descList)
     {
         mInflater = LayoutInflater.from(context);
         mPokemonNumberList = numList;
         mPokemonNameList = nameList;
+        mPokemonTypeList = typeList;
+        mPokemonAbilityList = abilList;
+        mPokemonDescList = descList;
+        //mPokemonImageList = imgList;
     }
 
     @NonNull
@@ -68,6 +77,10 @@ public class pokedexAdapter extends RecyclerView.Adapter<pokedexAdapter.pokedexV
         public void onClick(View v)
         {
             Intent intent = new Intent(context, detailedViewActivity.class);
+            intent.putExtra("name", mPokemonNameList);
+            intent.putExtra("type", mPokemonTypeList);
+            //intent.putExtra("abil", mPokemonAbilityList);
+            //intent.putExtra("desc", mPokemonDescList);
             context.startActivity(intent);
         }
     }
