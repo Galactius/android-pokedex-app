@@ -24,7 +24,7 @@ public class detailedViewActivity extends AppCompatActivity
 //         mDesc = findViewById(R.id.descText);
 //         mAbility = findViewById(R.id.abilText);
 //         mImage = findViewById(R.id.img);
-//         
+//
          Intent intent = getIntent();
          mType.setText(intent.getStringExtra("type"));
          mDesc.setText(intent.getStringExtra("desc"));

@@ -20,21 +20,12 @@ public class pokedexAdapter extends RecyclerView.Adapter<pokedexAdapter.pokedexV
 
     private LinkedList<Integer> mPokemonNumberList = new LinkedList<>();
     private LinkedList<String> mPokemonNameList = new LinkedList<>();
-    private LinkedList<String> mPokemonTypeList = new LinkedList<>();
-    private LinkedList<String> mPokemonAbilityList = new LinkedList<>();
-    private LinkedList<String> mPokemonDescList = new LinkedList<>();
-    private LinkedList<ImageView> mPokemonImageList = new LinkedList<>();
 
-    public pokedexAdapter(Context context, LinkedList<Integer> numList, LinkedList<String> nameList,
-                          LinkedList<String> typeList, LinkedList<String> abilityList, LinkedList<String> descList, LinkedList<ImageView> imageList)
+    public pokedexAdapter(Context context, LinkedList<Integer> numList, LinkedList<String> nameList)
     {
         mInflater = LayoutInflater.from(context);
         mPokemonNumberList = numList;
         mPokemonNameList = nameList;
-        mPokemonTypeList = typeList;
-        mPokemonAbilityList = abilityList;
-        mPokemonDescList = descList;
-        mPokemonImageList = imageList;
     }
 
     @NonNull
@@ -49,10 +40,8 @@ public class pokedexAdapter extends RecyclerView.Adapter<pokedexAdapter.pokedexV
     {
         String mCurrentName = mPokemonNameList.get(position);
         String mCurrentNumber = mPokemonNumberList.get(position).toString();
-        //ImageView mCurrentImage = mPokemonImageList.get(position);
         holder.mNameView.setText(mCurrentName);
         holder.mNumberView.setText(mCurrentNumber);
-        //holder.mImageView.set;
     }
 
     @Override
@@ -63,7 +52,6 @@ public class pokedexAdapter extends RecyclerView.Adapter<pokedexAdapter.pokedexV
     class pokedexViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         private TextView mNameView, mNumberView;
-        private ImageView mImageView;
         private pokedexAdapter adapter;
 
         public pokedexViewHolder(@NonNull View itemView, pokedexAdapter adapter)
@@ -71,7 +59,6 @@ public class pokedexAdapter extends RecyclerView.Adapter<pokedexAdapter.pokedexV
             super(itemView);
             mNameView = (TextView) itemView.findViewById(R.id.name);
             mNumberView = (TextView) itemView.findViewById(R.id.number);
-            mImageView = (ImageView) itemView.findViewById(R.id.image);
 
             this.adapter = adapter;
             itemView.setOnClickListener(this);
