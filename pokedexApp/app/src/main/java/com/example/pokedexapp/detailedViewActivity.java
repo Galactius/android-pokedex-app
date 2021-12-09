@@ -26,16 +26,14 @@ public class detailedViewActivity extends AppCompatActivity
 
         mName = findViewById(R.id.nameText);
         mType = findViewById(R.id.typeText);
-        //mDesc = findViewById(R.id.descText);
-        //mAbility = findViewById(R.id.abilText);
+        mAbility = findViewById(R.id.abilText);
         //mImage = findViewById(R.id.img);
 
          Intent intent = getIntent();
          mName.setText(intent.getStringExtra("name"));
          Log.d("IntentTest", intent.getStringExtra("name"));
-         //mType.setText(intent.getStringExtra("type"));
-         //mDesc.setText(intent.getStringExtra("desc"));
-         //mAbility.setText(intent.getStringExtra("abil"));
+         mType.setText(intent.getStringExtra("type"));
+         mAbility.setText(intent.getStringExtra("abil"));
 
          //mImage.setImageResource(...);
     }

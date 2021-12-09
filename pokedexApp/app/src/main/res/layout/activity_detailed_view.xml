@@ -11,51 +11,90 @@
             android:id="@+id/nameText"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="40dp"
+            app:layout_constraintHorizontal_bias="1.0"
+            android:textStyle="bold"
+            android:textSize="34sp"
+            android:paddingLeft="6dp" />
 
     <TextView
             android:id="@+id/typeText"
-            android:layout_width="418dp"
-            android:layout_height="67dp"
+            android:layout_width="0dp"
+            android:layout_height="53dp"
             tools:layout_conversion_absoluteHeight="110dp"
             tools:layout_conversion_absoluteWidth="411dp"
             app:layout_constraintTop_toBottomOf="@+id/nameText"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-            android:id="@+id/descText"
-            android:layout_width="0dp"
-            android:layout_height="52dp"
-            tools:layout_conversion_absoluteHeight="206dp"
-            tools:layout_conversion_absoluteWidth="411dp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/abilText"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintVertical_bias="0.0" />
+            android:layout_marginTop="40dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            android:textSize="34sp"
+            android:paddingLeft="6dp" />
 
     <TextView
             android:id="@+id/abilText"
             android:layout_width="0dp"
-            android:layout_height="61dp"
+            android:layout_height="53dp"
             tools:layout_conversion_absoluteHeight="57dp"
             tools:layout_conversion_absoluteWidth="411dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintTop_toBottomOf="@+id/typeText" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@+id/typeText"
+            android:layout_marginTop="40dp"
+            android:textSize="34sp"
+            android:paddingLeft="6dp" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Show Image"
-        android:onClick="launchImageActivity"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descText" />
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show Image"
+            android:onClick="launchImageActivity"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/abilText"
+            app:layout_constraintVertical_bias="0.19999999" />
+
+    <TextView
+            android:text="Name:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nameHARD"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/nameText"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="1.0"
+            android:textSize="16sp" />
+
+    <TextView
+            android:text="Type:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/typeHARD"
+            app:layout_constraintTop_toBottomOf="@+id/nameText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/typeText"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="1.0"
+            android:textSize="16sp" />
+
+    <TextView
+            android:text="Ability:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/abilHARD"
+            app:layout_constraintTop_toBottomOf="@+id/typeText"
+            app:layout_constraintBottom_toTopOf="@+id/abilText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="1.0"
+            android:textSize="16sp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -57,22 +57,31 @@ public class MainActivity extends AppCompatActivity
 
         //testing
 
-        num = "1";
-        PokeAPI api = new PokeAPI();
-        api.execute(num);
+        //num = "1";
 
+
+        for(int i = 1; i <= 10; i++)
+        {
+            mPokemonNumberList.add(String.valueOf(i));
+            PokeAPI api = new PokeAPI();
+            api.execute(String.valueOf(i));
+        }
 
     }
 
-    protected void processData(String name)
+    protected void processData(String name, String type, String abil)
     {
         this.name = name;
-        Log.d("processDataREACHtest", name);
+        this.type = type;
+        this.abil = abil;
 
-        mPokemonNameList.add(name);
-        Log.d("ListAddTest", mPokemonNameList.get(0));
+        //mPokemonNumberList.add("1");
 
-        mPokemonNumberList.add("1");
+        mPokemonNameList.add(name.substring(0, 1).toUpperCase() + name.substring(1));
+
+        mPokemonTypeList.add(type.substring(0, 1).toUpperCase() + type.substring(1));
+
+        mPokemonAbilityList.add(abil.substring(0, 1).toUpperCase() + abil.substring(1));
 
 
 
@@ -195,7 +204,7 @@ public class MainActivity extends AppCompatActivity
                 //gets description
 
 
-                MainActivity.this.processData(name);
+                MainActivity.this.processData(name, type, abil);
 
             }
             catch (Exception e)

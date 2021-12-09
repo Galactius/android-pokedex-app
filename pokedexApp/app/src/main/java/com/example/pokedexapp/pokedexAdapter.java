@@ -49,8 +49,8 @@ public class pokedexAdapter extends RecyclerView.Adapter<pokedexAdapter.pokedexV
     @Override
     public void onBindViewHolder(@NonNull pokedexViewHolder holder, int position)
     {
-        String mCurrentName = mPokemonNameList.get(position).toString();
-        String mCurrentNumber = mPokemonNumberList.get(position).toString();
+        String mCurrentName = mPokemonNameList.get(position).substring(0, 1).toUpperCase() + mPokemonNameList.get(position).substring(1);
+        String mCurrentNumber = "Pokemon #" + mPokemonNumberList.get(position).toString();
         holder.mNameView.setText(mCurrentName);
         holder.mNumberView.setText(mCurrentNumber);
     }
@@ -81,9 +81,8 @@ public class pokedexAdapter extends RecyclerView.Adapter<pokedexAdapter.pokedexV
             Intent intent = new Intent(context, detailedViewActivity.class);
             Log.d("AdapterPositionTest", mPokemonNameList.get(getAdapterPosition()));
             intent.putExtra("name", mPokemonNameList.get(getAdapterPosition()));
-            intent.putExtra("type", mPokemonTypeList);
-            //intent.putExtra("abil", mPokemonAbilityList);
-            //intent.putExtra("desc", mPokemonDescList);
+            intent.putExtra("type", mPokemonTypeList.get(getAdapterPosition()));
+            intent.putExtra("abil", mPokemonAbilityList.get(getAdapterPosition()));
             context.startActivity(intent);
         }
     }

@@ -16,7 +16,7 @@ public class secondaryActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_secondary);
 
-        //mImage = findViewById(R.id.pkmnImg);
+        //mImage = findViewById(R.id.pokeImg);
 
         Intent intent = getIntent();
         //intent.getExtra(...);
