@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -60,6 +61,9 @@ public class MainActivity extends AppCompatActivity
         PokeAPI api = new PokeAPI();
         api.execute(num);
 
+        Intent detailIntent = new Intent(this, detailedViewActivity.class);
+        detailIntent.putExtra("name", mPokemonNameList.get(0));
+
     }
 
     protected void processData(String result)
@@ -71,8 +75,6 @@ public class MainActivity extends AppCompatActivity
         Log.d("ListAddTest", mPokemonNameList.get(0));
 
         mPokemonNumberList.add("1");
-
-
     }
 
     private void CALL_TEST()
