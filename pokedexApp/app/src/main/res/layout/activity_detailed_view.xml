@@ -15,28 +15,24 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/numText"
-            android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:text="TextView" />
+                android:id="@+id/numText"
+                android:layout_width="match_parent"
+                android:layout_height="57dp" />
 
         <TextView
-            android:id="@+id/typeText"
-            android:layout_width="match_parent"
-            android:layout_height="110dp"
-            android:text="TextView" />
+                android:id="@+id/typeText"
+                android:layout_width="match_parent"
+                android:layout_height="110dp" />
 
         <TextView
-            android:id="@+id/descText"
-            android:layout_width="match_parent"
-            android:layout_height="206dp"
-            android:text="TextView" />
+                android:id="@+id/descText"
+                android:layout_width="match_parent"
+                android:layout_height="206dp" />
 
         <TextView
-            android:id="@+id/abilText"
-            android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:text="TextView" />
+                android:id="@+id/abilText"
+                android:layout_width="match_parent"
+                android:layout_height="57dp" />
 
         <ImageView
                 android:layout_width="match_parent"

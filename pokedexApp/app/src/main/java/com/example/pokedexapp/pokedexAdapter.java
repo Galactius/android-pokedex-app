@@ -67,8 +67,8 @@ public class pokedexAdapter extends RecyclerView.Adapter<pokedexAdapter.pokedexV
         @Override
         public void onClick(View v)
         {
-            Intent intent = new Intent(context, detailedViewActivity.class);
-            context.startActivity(intent);
+            Intent intent = new Intent(v.getContext(), detailedViewActivity.class);
+            v.getContext().startActivity(intent);
         }
     }
 
