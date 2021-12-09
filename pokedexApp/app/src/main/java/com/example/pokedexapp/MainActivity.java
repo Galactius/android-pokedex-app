@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity
         api.execute(num);
 
         Intent detailIntent = new Intent(this, detailedViewActivity.class);
-        detailIntent.putExtra("name", mPokemonNameList.get(0));
+        detailIntent.putExtra("name", mPokemonNameList);
 
     }
 
