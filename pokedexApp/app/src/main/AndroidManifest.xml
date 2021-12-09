@@ -13,11 +13,9 @@
         android:theme="@style/Theme.PokedexApp">
         <activity
             android:name=".secondaryActivity"
-            android:parentActivityName=".detailedViewActivity"
             android:exported="false" />
         <activity
             android:name=".detailedViewActivity"
-            android:parentActivityName=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

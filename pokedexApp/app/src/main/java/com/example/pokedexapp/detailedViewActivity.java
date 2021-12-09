@@ -43,6 +43,7 @@ public class detailedViewActivity extends AppCompatActivity
     public void launchImageActivity(View view)
     {
         Intent imageIntent = new Intent(this, secondaryActivity.class);
+        //imageIntent.putExtra("img", mImage);
         startActivity(imageIntent);
     }
 
