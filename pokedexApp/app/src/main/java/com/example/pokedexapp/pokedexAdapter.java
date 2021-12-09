@@ -18,10 +18,10 @@ public class pokedexAdapter extends RecyclerView.Adapter<pokedexAdapter.pokedexV
     private LayoutInflater mInflater;
     private Context context;
 
-    private LinkedList<Integer> mPokemonNumberList = new LinkedList<>();
+    private LinkedList<String> mPokemonNumberList = new LinkedList<>();
     private LinkedList<String> mPokemonNameList = new LinkedList<>();
 
-    public pokedexAdapter(Context context, LinkedList<Integer> numList, LinkedList<String> nameList)
+    public pokedexAdapter(Context context, LinkedList<String> numList, LinkedList<String> nameList)
     {
         mInflater = LayoutInflater.from(context);
         mPokemonNumberList = numList;
@@ -38,7 +38,7 @@ public class pokedexAdapter extends RecyclerView.Adapter<pokedexAdapter.pokedexV
     @Override
     public void onBindViewHolder(@NonNull pokedexViewHolder holder, int position)
     {
-        String mCurrentName = mPokemonNameList.get(position);
+        String mCurrentName = mPokemonNameList.get(position).toString();
         String mCurrentNumber = mPokemonNumberList.get(position).toString();
         holder.mNameView.setText(mCurrentName);
         holder.mNumberView.setText(mCurrentNumber);
