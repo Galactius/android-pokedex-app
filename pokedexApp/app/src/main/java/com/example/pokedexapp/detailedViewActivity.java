@@ -6,6 +6,7 @@ import com.example.pokedexapp.MainActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,8 +38,12 @@ public class detailedViewActivity extends AppCompatActivity
          //mAbility.setText(intent.getStringExtra("abil"));
 
          //mImage.setImageResource(...);
-
-
-
     }
+
+    public void launchImageActivity(View view)
+    {
+        Intent imageIntent = new Intent(this, secondaryActivity.class);
+        startActivity(imageIntent);
+    }
+
 }
