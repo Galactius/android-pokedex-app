@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity
     {
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new pokedexAdapter(this, mPokemonNumberList, mPokemonNameList);
+        mAdapter = new pokedexAdapter(this, mPokemonNumberList, mPokemonNameList, mPokemonTypeList, mPokemonAbilityList, mPokemonDescList);
         mRecyclerView.setAdapter(mAdapter);
     }
 
