@@ -1,16 +1,19 @@
+//////////////////////////
+///////Nate Diaz//////////
+///////Daniel Perez///////
+///////Khang Bui//////////
+//////////////////////////
+
 package com.example.pokedexapp;
 
-//import com.example.pokedexapp.PokeAPI;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
-import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ImageView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -29,23 +32,15 @@ public class MainActivity extends AppCompatActivity
     private final LinkedList<String> mPokemonNameList = new LinkedList<>();
     private final LinkedList<String> mPokemonTypeList = new LinkedList<>();
     private final LinkedList<String> mPokemonAbilityList = new LinkedList<>();
-    private final LinkedList<String> mPokemonDescList = new LinkedList<>();
-    private final LinkedList<ImageView> mPokemonImageList = new LinkedList<>();
+    private final LinkedList<Uri> mPokemonImageList = new LinkedList<>();
+    private final LinkedList<String> mPokemonLargeImageList = new LinkedList<>();
 
     private RecyclerView mRecyclerView;
     private pokedexAdapter mAdapter;
-    private Context context;
 
-    String num = null;
-    String name;
+    String name = null;
     String type = null;
     String abil = null;
-    String desc = null;
-    String imgURL = null;
-
-    private int numOfPKMNs = 10;
-
-//    private final PokeAPI api = new PokeAPI("1");
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -53,20 +48,13 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //processData();
-
-        //testing
-
-        //num = "1";
-
-
         for(int i = 1; i <= 10; i++)
         {
             mPokemonNumberList.add(String.valueOf(i));
             PokeAPI api = new PokeAPI();
             api.execute(String.valueOf(i));
-        }
 
+        }
     }
 
     protected void processData(String name, String type, String abil)
@@ -75,31 +63,34 @@ public class MainActivity extends AppCompatActivity
         this.type = type;
         this.abil = abil;
 
-        //mPokemonNumberList.add("1");
-
         mPokemonNameList.add(name.substring(0, 1).toUpperCase() + name.substring(1));
 
         mPokemonTypeList.add(type.substring(0, 1).toUpperCase() + type.substring(1));
 
         mPokemonAbilityList.add(abil.substring(0, 1).toUpperCase() + abil.substring(1));
 
+        String imgNum = String.valueOf(mPokemonNameList.size());
+        Log.d("imgNumTest", String.valueOf(mPokemonNameList.size()));
 
+        Uri sprite = Uri.parse("android.resource://com.example.pokedexapp/drawable/a" + imgNum);
+        mPokemonImageList.add(sprite);
 
-        CALL_TEST();
+        String path = "android.resource://com.example.pokedexapp/drawable/b" + imgNum;
+        mPokemonLargeImageList.add(path);
+
+        AdapterSetup();
     }
 
-    private void CALL_TEST()
+    private void AdapterSetup()
     {
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new pokedexAdapter(this, mPokemonNumberList, mPokemonNameList, mPokemonTypeList, mPokemonAbilityList, mPokemonDescList);
+        mAdapter = new pokedexAdapter(this, mPokemonNumberList, mPokemonNameList, mPokemonTypeList, mPokemonAbilityList, mPokemonImageList, mPokemonLargeImageList);
         mRecyclerView.setAdapter(mAdapter);
     }
 
     class PokeAPI extends AsyncTask<String, Void, String>
     {
-        //temp
-
         protected String getPokeInfo(String query) throws IOException
         {
             //Main API URL
@@ -112,7 +103,7 @@ public class MainActivity extends AppCompatActivity
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
-            //Recieves Respone
+            //Receives Response
             InputStream inputStream = urlConnection.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
@@ -149,39 +140,17 @@ public class MainActivity extends AppCompatActivity
             return jsonString;
         }
 
-
         protected void onPostExecute(String s) //s comes from doInBackground
         {
             super.onPostExecute(s);
-            num = null;
-            //name = null;
-            type = null;
-            abil = null;
-            desc = null;
-            imgURL = null;
-            JSONObject jsonObject = null;
-            JSONArray itemsArray = null;
-            JSONArray abilArray = null;
-            JSONArray typesArray = null;
-            int i = 0;
+
+            JSONObject jsonObject;
+            JSONArray abilArray;
+            JSONArray typesArray;
 
             try
             {
                 jsonObject = new JSONObject(s);
-
-
-//              itemsArray = jsonObject.getJSONArray("items"); // chooses what array in API to look in
-//
-//                while(i < itemsArray.length()) //there's a && == null but we'll see if i need it
-//                {
-//                    //JSONObject pokemon = itemsArray.getJSONObject(i); //gets items from array in API listed in itemsArray
-//                    //JSONObject that gets some info from above
-//                    //JSONObject names = pokemon.getJSONObject("name");
-//
-//
-//                    i++;
-//                }
-
 
                 //gets name
                 name = jsonObject.getString("name");
@@ -201,11 +170,8 @@ public class MainActivity extends AppCompatActivity
                 abil = abil1.getString("name");
                 Log.d("AbilityAPICallTest", abil);
 
-                //gets description
-
-
+                //sends to processData
                 MainActivity.this.processData(name, type, abil);
-
             }
             catch (Exception e)
             {

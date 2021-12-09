@@ -14,9 +14,8 @@ public class detailedViewActivity extends AppCompatActivity
 {
     public TextView mName;
     public TextView mType;
-    public TextView mDesc;
     public TextView mAbility;
-    public ImageView mImage;
+    public String mImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -27,21 +26,18 @@ public class detailedViewActivity extends AppCompatActivity
         mName = findViewById(R.id.nameText);
         mType = findViewById(R.id.typeText);
         mAbility = findViewById(R.id.abilText);
-        //mImage = findViewById(R.id.img);
 
          Intent intent = getIntent();
          mName.setText(intent.getStringExtra("name"));
-         Log.d("IntentTest", intent.getStringExtra("name"));
          mType.setText(intent.getStringExtra("type"));
          mAbility.setText(intent.getStringExtra("abil"));
-
-         //mImage.setImageResource(...);
+         mImage = intent.getStringExtra("img");
     }
 
     public void launchImageActivity(View view)
     {
         Intent imageIntent = new Intent(this, secondaryActivity.class);
-        //imageIntent.putExtra("img", mImage);
+        imageIntent.putExtra("img", mImage);
         startActivity(imageIntent);
     }
 
