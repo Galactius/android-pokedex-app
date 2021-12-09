@@ -2,6 +2,7 @@ package com.example.pokedexapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ public class pokedexAdapter extends RecyclerView.Adapter<pokedexAdapter.pokedexV
         mPokemonTypeList = typeList;
         mPokemonAbilityList = abilList;
         mPokemonDescList = descList;
+        this.context = context;
         //mPokemonImageList = imgList;
     }
 
@@ -77,7 +79,8 @@ public class pokedexAdapter extends RecyclerView.Adapter<pokedexAdapter.pokedexV
         public void onClick(View v)
         {
             Intent intent = new Intent(context, detailedViewActivity.class);
-            intent.putExtra("name", mPokemonNameList);
+            Log.d("AdapterPositionTest", mPokemonNameList.get(getAdapterPosition()));
+            intent.putExtra("name", mPokemonNameList.get(getAdapterPosition()));
             intent.putExtra("type", mPokemonTypeList);
             //intent.putExtra("abil", mPokemonAbilityList);
             //intent.putExtra("desc", mPokemonDescList);

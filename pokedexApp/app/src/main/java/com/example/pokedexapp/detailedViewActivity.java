@@ -5,6 +5,7 @@ import com.example.pokedexapp.MainActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,7 +23,7 @@ public class detailedViewActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_view);
 
-        mName = findViewById(R.id.name);
+        mName = findViewById(R.id.nameText);
         mType = findViewById(R.id.typeText);
         //mDesc = findViewById(R.id.descText);
         //mAbility = findViewById(R.id.abilText);
@@ -30,7 +31,8 @@ public class detailedViewActivity extends AppCompatActivity
 
          Intent intent = getIntent();
          mName.setText(intent.getStringExtra("name"));
-         mType.setText(intent.getStringExtra("type"));
+         Log.d("IntentTest", intent.getStringExtra("name"));
+         //mType.setText(intent.getStringExtra("type"));
          //mDesc.setText(intent.getStringExtra("desc"));
          //mAbility.setText(intent.getStringExtra("abil"));
 

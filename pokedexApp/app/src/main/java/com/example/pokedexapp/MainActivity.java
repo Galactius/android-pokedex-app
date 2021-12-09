@@ -64,15 +64,17 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    protected void processData(String result)
+    protected void processData(String name)
     {
-        name = result;
+        this.name = name;
         Log.d("processDataREACHtest", name);
 
         mPokemonNameList.add(name);
         Log.d("ListAddTest", mPokemonNameList.get(0));
 
         mPokemonNumberList.add("1");
+
+
 
         CALL_TEST();
     }
@@ -183,11 +185,14 @@ public class MainActivity extends AppCompatActivity
                 type = type1.getString("name");
                 Log.d("TypeAPICallTest", type);
 
+                //gets first ability
                 abilArray = jsonObject.getJSONArray("abilities");
                 JSONObject abilities = abilArray.getJSONObject(0);
                 JSONObject abil1 = abilities.getJSONObject("ability");
                 abil = abil1.getString("name");
                 Log.d("AbilityAPICallTest", abil);
+
+                //gets description
 
 
                 MainActivity.this.processData(name);
